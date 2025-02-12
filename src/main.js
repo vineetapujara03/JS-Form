@@ -5,7 +5,7 @@ const studentUpdateLink = document.getElementById('studentUpdateLink');
 
 const API_URL = "http://localhost:3000/students";
 
-
+//function to get all students data
 async function grabStudents() {
     try {
             const response = await fetch(API_URL);
@@ -20,7 +20,7 @@ async function grabStudents() {
 
 
 
-  
+  //function to store students
 async function storeStudents(student) {
 
     const method = 'POST'
@@ -46,6 +46,7 @@ async function storeStudents(student) {
       alert('Failed to save student.');
   });
 }
+// function to update student using put request
 async function updateStudents(student,id) {
    
     const method = 'PUT'
@@ -72,10 +73,10 @@ async function updateStudents(student,id) {
   });
 }
 
+//function to list all students and show student table
 async function listStudents() {
     const response = await fetch(API_URL);
      const students = await response.json();
-     console.log(students);
     if (students.length === 0) {
         content.innerHTML = `<p>Add a student.</p>`;
     } else {
@@ -124,7 +125,7 @@ studentUpdateLink.addEventListener('click', (e) => {
     studentForm();
 });
 
-
+// click-edit function to edit a particular student
 async function editStudent(index){
  
     studentForm(index);
@@ -142,8 +143,8 @@ async function editStudent(index){
   
 }
 
+// save student to student table
 async function saveStudent() {
-  console.log("hi")
   const studentId = parseInt(document.getElementById('studentId').value); 
   const studentName = document.getElementById('studentName').value;
   const studentAge = parseInt(document.getElementById('studentAge').value);
@@ -159,8 +160,8 @@ async function saveStudent() {
   }
 }
 
+//saving edited student data
 async function saveEditStudent(index){
-  console.log("hi")
    const editStudents = await fetch(API_URL);
     parsedStudents = await editStudents.json();
    
@@ -175,6 +176,7 @@ async function saveEditStudent(index){
      await listStudents();
     }
 
+//function to upload file 
 async function uploadFile(event){
     event.preventDefault();
     const file = document.getElementById("studentFile");
@@ -198,7 +200,7 @@ async function uploadFile(event){
 }
 listStudents();
 
-
+//showing student form to create and update student
 async function studentForm(index) {
   const form = `
       <form>
